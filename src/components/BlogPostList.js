@@ -12,6 +12,7 @@ const BlogPostList = () =>
 
     const [active, setActive] = useState(1);
     const { state, dispatch } = useContext(NewsContext);
+
     const fetchNews = async () =>
     {
         dispatch({ type: 'FETCH_NEWS_REQUEST' });
@@ -26,6 +27,7 @@ const BlogPostList = () =>
             dispatch({ type: 'FETCH_NEWS_FAILURE', payload: error.message });
         }
     };
+
     useEffect(() =>
     {
         fetchNews();
@@ -50,12 +52,11 @@ const BlogPostList = () =>
     return <>
         <Container style={{ display: "flex", flexWrap: "wrap" }} data-testid="container">
             {
-                state.loading && <div><h1>Loading....</h1></div>
-            }
-            {
-                state.articles && state.articles.map((item, index) => (
-                    <BlogPostItem post={item} key={index} />
-                ))
+                state.loading ?
+                    <div><h1>Loading....</h1></div> :
+                    state.articles.map((item, index) => (
+                        <BlogPostItem post={item} key={index} />
+                    ))
             }
             {
                 state.error && state.loading === false && <div><h1 style={{ color: "red" }}>{state.error}</h1></div>
