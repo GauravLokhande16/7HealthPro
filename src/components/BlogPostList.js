@@ -51,16 +51,17 @@ const BlogPostList = () =>
 
     return <>
         <Container style={{ display: "flex", flexWrap: "wrap" }} data-testid="container">
-            {
-                state.loading ?
-                    <div><h1>Loading....</h1></div> :
-                    state.articles?.map((item, index) => (
-                        <BlogPostItem post={item} key={index} />
-                    ))
+            {state.loading ? (
+                <div><h1>Loading....</h1></div>
+            ) : state.error ? (
+                <div><h1 style={{ color: "red" }}>{state.error}</h1></div>
+            ) : (
+                state.articles?.map((item, index) => (
+                    <BlogPostItem post={item} key={index} />
+                ))
+            )
             }
-            {
-                state.error && state.loading === false && <div><h1 style={{ color: "red" }}>{state.error}</h1></div>
-            }
+
         </Container>
         <div style={{ justifyContent: "center", display: "flex" }} >
             <Pagination data-testid="pagination">
