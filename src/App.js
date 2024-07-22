@@ -1,25 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+// import './App.css';
+import { Route, RouterProvider, Routes, createBrowserRouter } from 'react-router-dom';
+import BlogPostList from './components/BlogPostList';
+import BlogPostDetails from './components/BlogPostDetails';
+import { Container } from 'react-bootstrap';
+import { NewsContext, initialState, newsReducer } from './context/NewsContext';
+import { useReducer } from 'react';
 
-function App() {
+
+function App()
+{
+  const [state, dispatch] = useReducer(newsReducer, initialState);
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <BlogPostList />
+    },
+    {
+      path: "/:name",
+      element: <BlogPostDetails />,
+    },
+  ]);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <NewsContext.Provider value={{ state, dispatch }}>
+      <div className="App">
+        <Container >
+          <h1>News Blog posts</h1>
+          <RouterProvider router={router} />
+        </Container>
+      </div>
+    </NewsContext.Provider>
+  )
 }
+
 
 export default App;
