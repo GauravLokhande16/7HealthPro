@@ -2,6 +2,7 @@
   "name": "7health",
   "version": "0.1.0",
   "private": true,
+  "proxy": "https://newsapi.org",
   "dependencies": {
     "@testing-library/dom": "^10.3.2",
     "@testing-library/user-event": "^13.5.0",
