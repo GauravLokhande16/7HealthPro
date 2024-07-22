@@ -53,7 +53,7 @@ const BlogPostList = () =>
                 state.loading && <div><h1>Loading....</h1></div>
             }
             {
-                state.articles.length > 0 && state.articles.map((item, index) => (
+                state.articles?.length > 0 && state.articles.map((item, index) => (
                     <BlogPostItem post={item} key={index} />
                 ))
             }
